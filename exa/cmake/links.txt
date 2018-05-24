@@ -1,0 +1,8 @@
+cross compiling wiki: https://gitlab.kitware.com/cmake/community/wikis/doc/cmake/CrossCompiling
+
+linker script: https://stackoverflow.com/questions/32864689/cmake-how-to-add-dependency-on-linker-script-for-executable
+stm32 example: https://geokon-gh.github.io/stm32f4/
+avr example: https://nnarain.github.io/2016/03/29/AVR-CMake-Toolchain.html
+official cross compile (not embedded): https://cmake.org/cmake/help/v3.6/manual/cmake-toolchains.7.html
+
+
