@@ -21,6 +21,7 @@ else
 	GCC_DIR     ?= /opt/msp430/msp430-gcc
 	GCC_SUPPORT_DIR     ?= /opt/msp430/msp430-gcc-support-files
 	GCC_MSP_INC_DIR ?= $(GCC_SUPPORT_DIR)/include
+	DRIVERLIB   := /opt/msp430/msp430-driverlib
 	LDDIR       := $(GCC_MSP_INC_DIR)/$(shell echo $(DEVICE) | tr A-Z a-z)
 	RM          := rm -rf
 endif
@@ -35,10 +36,10 @@ GDB	             := $(GCC_BIN_DIR)/msp430-elf-gdb
 ######################################
 CFLAGS           := -O2 -D__$(DEVICE)__ -mmcu=$(DEVICE) -g -ffunction-sections -fdata-sections -DDEPRECATED
 LDFLAGS          := -T $(LDDIR).ld -L $(GCC_MSP_INC_DIR) -mmcu=$(DEVICE) -g -Wl,--gc-sections
-INCLUDES         := -I $(GCC_MSP_INC_DIR) -I $(GCC_INC_DIR) -I $(GCC_SUPPORT_INC_DIR) -I ../../../../driverlib/MSP430FR5xx_6xx -I ../..
+INCLUDES         := -I $(GCC_MSP_INC_DIR) -I $(GCC_INC_DIR) -I $(GCC_SUPPORT_INC_DIR) -I ${DRIVERLIB}/driverlib/MSP430FR5xx_6xx -I ../..
 ######################################
-DRIVERLIB_SRC    := $(wildcard ../../../../driverlib/MSP430FR5xx_6xx/*.c)
-EXAMPLE_SRC      := ../$(EXAMPLE).c
+DRIVERLIB_SRC    := $(wildcard ${DRIVERLIB}/driverlib/MSP430FR5xx_6xx/*.c)
+EXAMPLE_SRC      := src/main.c
 SRC              := $(EXAMPLE_SRC) $(DRIVERLIB_SRC)
 DRIVERLIB_OBJECTS:= $(patsubst %.c,%.o,$(DRIVERLIB_SRC))
 EXOBJECT         := $(EXAMPLE)/$(EXAMPLE).o
