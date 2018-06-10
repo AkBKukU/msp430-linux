@@ -22,12 +22,15 @@ set( DRIVERLIB "/opt/msp430/msp430-driverlib/driverlib/MSP430FR5xx_6xx" )
 
 # Executables
 set( GCC_BIN_DIR "${GCC_DIR}/bin" )
-set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${LINKER_SCRIPT}" )
-set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mmcu=${DEVICE}" )
-set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -Wl,--gc-sections" )
+set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${LINKER_SCRIPT}" CACHE STRING "" FORCE )
+set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mmcu=${DEVICE}" CACHE STRING "" FORCE )
+set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -Wl,--gc-sections" CACHE STRING "" FORCE )
 
-set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O2 -D__$(DEVICE)__ -mmcu=${DEVICE} -g -ffunction-sections" )
-set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fdata-sections -DDEPRECATED" )
+set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O2 -D__$(DEVICE)__ -mmcu=${DEVICE} -g -ffunction-sections" CACHE STRING "" FORCE )
+set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fdata-sections -DDEPRECATED" CACHE STRING "" FORCE )
+
+set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -O2 -D__$(DEVICE)__ -mmcu=${DEVICE} -g -ffunction-sections" CACHE STRING "" FORCE )
+set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fdata-sections -DDEPRECATED" CACHE STRING "" FORCE )
 
 CMAKE_FORCE_C_COMPILER("${GCC_BIN_DIR}/msp430-elf-gcc" GNU)
 CMAKE_FORCE_CXX_COMPILER( "${GCC_BIN_DIR}/msp430-elf-g++" GNU)
@@ -47,6 +50,8 @@ SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 include_directories( "${GCC_DIR}/msp430-elf/include" )
 include_directories( "${GCC_SUPPORT_DIR}/include" )
 include_directories( "${DRIVERLIB}" )
+link_directories( "${DRIVERLIB}" )
+link_directories( "${GCC_SUPPORT_DIR}/include" )
 
 # -- Project Configuration --
 project(MSP430Test)
