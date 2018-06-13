@@ -14,11 +14,6 @@ set( BIN_NAME msp430test )
 file(GLOB SOURCES "${DRIVERLIB_DIR}/*.c" "src/*.c")
 
 
-
-# -- Compiling Configuration --
-# TODO - Seperate toolchain file for this
-
-
 # Flags for debug build
 set(
 	CMAKE_CXX_FLAGS_DEBUG
