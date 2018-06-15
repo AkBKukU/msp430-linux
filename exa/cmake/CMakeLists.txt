@@ -11,7 +11,7 @@ set( BIN_NAME msp430test )
 
 # Add all files from a src folder
 #file(GLOB SOURCES "src/*.cpp")
-file(GLOB SOURCES "${DRIVERLIB_DIR}/*.c" "src/*.c")
+file(GLOB SOURCES "src/*.c")
 
 
 # Flags for debug build
@@ -34,4 +34,13 @@ message("Sources: ${SOURCES}")
 message("Compiler: ${CMAKE_C_COMPILER}")
 # Setup binary output
 add_executable(${BIN_NAME} ${SOURCES})
+
+# TI Libraries
+if( INC_DRIVERLIB ) 
+	set( MSP430_FILES "/opt/msp430" )
+	set( DRIVERLIB_DIR "${MSP430_FILES}/msp430-driverlib" )
+	add_subdirectory ("${DRIVERLIB_DIR}" "${CMAKE_CURRENT_BINARY_DIR}/libs/driverlib")
+endif()
+
+target_link_libraries ( ${BIN_NAME} LINK_PUBLIC DriverLib)
 #set_target_properties( ${BIN_NAME} PROPERTIES LINK_DEPENDS ${LINKER_SCRIPT} )

@@ -10,7 +10,6 @@ set(CMAKE_SYSTEM_NAME Generic)
 
 # Device name for the chip to compile
 set( DEVICE "MSP430FR5969" CACHE STRING "Device part number")
-set( DEVICE_DRVLIB "MSP430FR5xx_6xx" CACHE STRING "DriverLib folder")
 string( TOLOWER ${DEVICE} DEVICE )
 set( LINKER_SCRIPT "${DEVICE}.ld" )
 
@@ -30,7 +29,7 @@ set( GCC_SUPPORT_DIR "${MSP430_FILES}/msp430-gcc-support-files" )
 
 # TI Libraries
 if( INC_DRIVERLIB ) 
-	set( DRIVERLIB_DIR "${MSP430_FILES}/msp430-driverlib/driverlib/${DEVICE_DRVLIB}" )
+	set( DRIVERLIB_DIR "${MSP430_FILES}/msp430-driverlib" )
 endif()
 
 if( INC_ENERGIA ) 
@@ -53,10 +52,10 @@ set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${LINKER_SCRIPT}" CACH
 set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mmcu=${DEVICE}" CACHE STRING "" FORCE )
 set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -Wl,--gc-sections" CACHE STRING "" FORCE )
 
-set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O2 -D__$(DEVICE)__ -mmcu=${DEVICE} -g -ffunction-sections" CACHE STRING "" FORCE )
+set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O2 -D__${DEVICE}__ -mmcu=${DEVICE} -g -ffunction-sections" CACHE STRING "" FORCE )
 set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fdata-sections -DDEPRECATED" CACHE STRING "" FORCE )
 
-set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -O2 -D__$(DEVICE)__ -mmcu=${DEVICE} -g -ffunction-sections" CACHE STRING "" FORCE )
+set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -O2 -D__${DEVICE}__ -mmcu=${DEVICE} -g -ffunction-sections" CACHE STRING "" FORCE )
 set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fdata-sections -DDEPRECATED" CACHE STRING "" FORCE )
 
 
@@ -66,13 +65,10 @@ set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fdata-sections -DDEPRECATED" CACHE STRING
 include_directories( "${GCC_DIR}/msp430-elf/include" )
 include_directories( "${GCC_SUPPORT_DIR}/include" )
 link_directories( "${GCC_SUPPORT_DIR}/include" )
+
 # TI Libraries
-if( INC_DRIVERLIB ) 
-	include_directories( "${DRIVERLIB_DIR}" )
-	#link_directories( "${DRIVERLIB_DIR}" )
-endif()
 if( INC_ENERGIA ) 
-	include_directories( "${ENERGIA_DIR}" )
+	#include_directories( "${ENERGIA_DIR}" )
 	#link_directories( "${ENERGIA_DIR}" )
 endif()
 

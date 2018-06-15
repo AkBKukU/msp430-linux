@@ -40,7 +40,7 @@ INCLUDES         := -I $(GCC_MSP_INC_DIR) -I $(GCC_INC_DIR) -I $(GCC_SUPPORT_INC
 ######################################
 DRIVERLIB_SRC    := $(wildcard ${DRIVERLIB}/driverlib/MSP430FR5xx_6xx/*.c)
 EXAMPLE_SRC      := src/main.c
-SRC              := $(EXAMPLE_SRC) $(DRIVERLIB_SRC)
+SRC              := $(EXAMPLE_SRC)# $(DRIVERLIB_SRC)
 DRIVERLIB_OBJECTS:= $(patsubst %.c,%.o,$(DRIVERLIB_SRC))
 EXOBJECT         := $(EXAMPLE)/$(EXAMPLE).o
 EXOUTPUT         := $(EXAMPLE)/$(EXAMPLE).out
