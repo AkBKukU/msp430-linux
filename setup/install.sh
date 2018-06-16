@@ -17,3 +17,5 @@ rsync -av --progress msp430-gcc-support-files /opt/msp430/
 wget http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSP430_Driver_Library/latest/exports/msp430_driverlib_2_91_07_07.zip
 unzip msp430_driverlib*
 rsync -av --progress msp430_driverlib/* /opt/msp430/msp430-driverlib
+
+echo "You need to either link or copy the cmake file for driverlib in the cmake folder to the root of driverlib"
