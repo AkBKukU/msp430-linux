@@ -35,7 +35,7 @@
 //   Writes a Word(FFFFh) to Port A and stays in LPM4
 //   ACLK = 32.768kHz, MCLK = SMCLK = default DCO
 //
-//  Tested On:   MSP430FR5969
+//  Tested On: MSP430F5529, MSP430FR5739
 //             -----------------
 //         /|\|                 |
 //          | |                 |
@@ -80,15 +80,10 @@ void main (void)
         GPIO_PIN12 + GPIO_PIN13 + GPIO_PIN14 + GPIO_PIN15
         );
 
-    /*
-     * Disable the GPIO power-on default high-impedance mode to activate
-     * previously configured port settings
-     */
-    PMM_unlockLPM5();
-
     //Enter LPM4 w/interrupts enabled
     __bis_SR_register(LPM4_bits + GIE);
 
     //For debugger
     __no_operation();
 }
+
