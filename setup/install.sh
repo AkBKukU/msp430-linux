@@ -1,4 +1,4 @@
-sudo apt-get -y install subversion gcc texinfo patch libncurses5-dev zlibc zlib1g-dev libx11-dev libusb-dev libreadline6-dev mspdebug
+sudo apt-get -y install subversion gcc texinfo patch libncurses5-dev zlibc zlib1g-dev libx11-dev libusb-dev libreadline6-dev
 
 
 #wget http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/exports/msp430-gcc-6.4.0.32_linux64.tar.bz2
@@ -19,3 +19,6 @@ unzip msp430_driverlib*
 rsync -av --progress msp430_driverlib/* /opt/msp430/msp430-driverlib
 
 echo "You need to either link or copy the cmake file for driverlib in the cmake folder to the root of driverlib"
+echo "Exa: ln -s ../cmake/driverlib.CMakeLists.txt /opt/msp430-driverlib "
+
+
